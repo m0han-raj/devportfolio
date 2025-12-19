@@ -30,15 +30,25 @@ const hasProjects = siteConfig.projects && siteConfig.projects.length > 0;
                     }
                   : {};
 
+                const cardStyle = project.bgImage
+                  ? {
+                      backgroundImage: `linear-gradient(135deg, rgba(255,255,255,0.95), rgba(255,255,255,0.9)), url(${project.bgImage})`,
+                      backgroundSize: "cover",
+                      backgroundPosition: "center",
+                      backgroundRepeat: "no-repeat",
+                    }
+                  : {};
+
                 return (
                   <div class="group relative">
                     <Component
                       {...linkProps}
-                      class={`block relative p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 ${
+                      class={`block relative p-4 sm:p-6 md:p-8 bg-gray-50 rounded-xl sm:rounded-2xl border border-gray-200 transition-all duration-300 overflow-hidden ${
                         project.link
                           ? "hover:bg-white hover:shadow-xl hover:border-gray-300 hover:-translate-y-1"
                           : ""
                       }`}
+                      style={cardStyle}
                     >
                       {project.link && (
                         <div class="absolute top-4 right-4 sm:top-6 sm:right-6 md:top-8 md:right-8 w-10 h-10 sm:w-11 sm:h-11 md:w-12 md:h-12 flex items-center justify-center bg-gray-900 rounded-full text-white transition-all duration-300 group-hover:bg-gray-700">
