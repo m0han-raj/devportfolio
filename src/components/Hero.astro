@@ -150,11 +150,11 @@ import { siteConfig } from "../config";
       </p>
     </div>
     {siteConfig.avatar && (
-      <div class="shrink-0 animate-fade-in animation-delay-400">
+      <div class="shrink-0 animate-fade-in animation-delay-400 -ml-6 sm:-ml-8 md:-ml-10">
         <img
           src={siteConfig.avatar}
           alt={`${siteConfig.name} profile photo`}
-          class="w-28 h-28 sm:w-36 sm:h-36 md:w-44 md:h-44 rounded-full object-cover border-4"
+          class="w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full object-cover border-4"
           style={`border-color: ${siteConfig.accentColor}`}
           loading="eager"
         />
