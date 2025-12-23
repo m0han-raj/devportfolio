@@ -3,6 +3,7 @@ export const siteConfig = {
   title: "an AI Engineer",
   description: "Blending code and creativity to shape the future with deep learning, and generative AI.",
   accentColor: "#1d4ed8",
+  avatar: "https://media.licdn.com/dms/image/v2/D5603AQFlHt7s6xysDw/profile-displayphoto-scale_400_400/B56Zs35Yg2IYAg-/0/1766169348679?e=1767830400&v=beta&t=GkAOWYKZ0qABYCM5P2eDEcEOmzWYhmJNrePFWlUWWOE",
   social: {
     email: "mohan.work23@gmail.com",
     linkedin: "https://www.linkedin.com/in/mohanraj328/",
