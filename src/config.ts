@@ -45,9 +45,9 @@ export const siteConfig = {
       description:
         "A BiLSTM-CRF model for Named Entity Recognition in Tamil text using character-level and word-level embeddings.",
       link: "https://github.com/m0han-raj/neuroNER",
-      skills: ["PyTorch", "torchCRF"],
+      skills: ["PyTorch", "torchCRF",""],
       bgImage:
-        "https://github.com/m0han-raj/neuroNER/raw/master/media/demo.gif",
+        "https://miro.medium.com/v2/resize:fit:1400/0*ug2-DGzL7KepNl9I.gif",
     },
   ],
   experience: [
