@@ -40,6 +40,15 @@ export const siteConfig = {
       bgImage:
         "https://miro.medium.com/v2/resize:fit:720/format:webp/1*f8UN4rrXIWjuciyODBTXxg.gif",
     },
+    {
+      name: "neuroNER",
+      description:
+        "A BiLSTM-CRF model for Named Entity Recognition in Tamil text using character-level and word-level embeddings.",
+      link: "https://github.com/m0han-raj/neuroNER",
+      skills: ["PyTorch", "torchCRF"],
+      bgImage:
+        "https://github.com/m0han-raj/neuroNER/raw/master/media/demo.gif",
+    },
   ],
   experience: [
   {
