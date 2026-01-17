@@ -57,7 +57,7 @@ export const siteConfig = {
       link: "https://github.com/m0han-raj/ReAct-reasoning-and-acting",
       skills: ["Python", "AI Agents"],
       bgImage:
-        "https://miro.medium.com/v2/resize:fit:1400/1*8fGKsvpz7C0qWzV5qKqL5A.gif",
+        "https://substackcdn.com/image/fetch/$s_!jFpt!,f_auto,q_auto:good,fl_progressive:steep/https%3A%2F%2Fsubstack-post-media.s3.amazonaws.com%2Fpublic%2Fimages%2F6b27a8a7-8f67-4558-a3f4-44bf512e6c92_1766x812.gif",
     },
     {
       name: "Lifelong LLM Agents",
@@ -66,7 +66,7 @@ export const siteConfig = {
       link: "https://github.com/m0han-raj/lifelong-LLM-agents",
       skills: ["Python", "Reinforcement Learning"],
       bgImage:
-        "https://miro.medium.com/v2/resize:fit:1400/1*N4h1SgwvI-ZqJXfzKvHg5Q.gif",
+        "https://media2.giphy.com/media/v1.Y2lkPTZjMDliOTUyZHk0NG5zeWJycXdrMWlxbGV2NTN2bzY0djVxaWs5MHBtN2Z5b3J6bCZlcD12MV9naWZzX3NlYXJjaCZjdD1n/xh7Nhs6PlOThC/200.gif",
     },
     {
       name: "ResNet34",
@@ -75,7 +75,7 @@ export const siteConfig = {
       link: "https://github.com/m0han-raj/ResNet34",
       skills: ["PyTorch"],
       bgImage:
-        "https://miro.medium.com/v2/resize:fit:1400/1*D0F3UitQ2l5Q0Ak-tjEdJg.gif",
+        "https://miro.medium.com/v2/resize:fit:1400/1*lD7eU_KynLT8xTh0vfRd7g.gif",
     },
   ],
   experience: [
