@@ -50,6 +50,33 @@ export const siteConfig = {
       bgImage:
         "https://miro.medium.com/v2/resize:fit:1400/0*ug2-DGzL7KepNl9I.gif",
     },
+    {
+      name: "ReAct: Reasoning and Acting",
+      description:
+        "Implementation of the ReAct framework that combines reasoning and acting in language models for enhanced decision-making and task-solving capabilities.",
+      link: "https://github.com/m0han-raj/ReAct-reasoning-and-acting",
+      skills: ["Python", "AI Agents"],
+      bgImage:
+        "https://miro.medium.com/v2/resize:fit:1400/1*8fGKsvpz7C0qWzV5qKqL5A.gif",
+    },
+    {
+      name: "Lifelong LLM Agents",
+      description:
+        "A framework for building lifelong learning agents using large language models that can continuously learn and adapt from new experiences.",
+      link: "https://github.com/m0han-raj/lifelong-LLM-agents",
+      skills: ["Python", "Reinforcement Learning"],
+      bgImage:
+        "https://miro.medium.com/v2/resize:fit:1400/1*N4h1SgwvI-ZqJXfzKvHg5Q.gif",
+    },
+    {
+      name: "ResNet34",
+      description:
+        "Implementation of the ResNet34 deep residual network architecture for image classification with residual learning and skip connections.",
+      link: "https://github.com/m0han-raj/ResNet34",
+      skills: ["PyTorch"],
+      bgImage:
+        "https://miro.medium.com/v2/resize:fit:1400/1*D0F3UitQ2l5Q0Ak-tjEdJg.gif",
+    },
   ],
   experience: [
   {
