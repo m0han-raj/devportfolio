@@ -149,17 +149,6 @@ import { siteConfig } from "../config";
         {siteConfig.title}
       </p>
     </div>
-    {siteConfig.avatar && (
-      <div class="shrink-0 animate-fade-in animation-delay-400 -ml-6 sm:-ml-8 md:-ml-10">
-        <img
-          src={siteConfig.avatar}
-          alt={`${siteConfig.name} profile photo`}
-          class="w-52 h-52 sm:w-64 sm:h-64 md:w-72 md:h-72 lg:w-80 lg:h-80 rounded-full object-cover border-4"
-          style={`border-color: ${siteConfig.accentColor}`}
-          loading="eager"
-        />
-      </div>
-    )}
   </div>
   <div
     class="absolute bottom-0 left-0 right-0 p-8 sm:p-12 md:p-24 flex gap-x-4 sm:gap-x-6 md:gap-x-8 text-gray-700 animate-fade-in animation-delay-600"
