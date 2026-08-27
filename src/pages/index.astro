@@ -1,5 +1,6 @@
 ---
 import Header from "../components/Header.astro";
+import ThemeToggle from "../components/ThemeToggle.astro";
 import Hero from "../components/Hero.astro";
 import About from "../components/About.astro";
 import Projects from "../components/Projects.astro";
@@ -8,6 +9,16 @@ import Education from "../components/Education.astro";
 import Footer from "../components/Footer.astro";
 import { siteConfig } from "../config";
 import "../styles/global.css";
+
+// `html:root` outweighs the plain `:root` rules in global.css, so these
+// win regardless of stylesheet order.
+const accentVars = `
+  html:root { --c-accent: ${siteConfig.accentColor}; }
+  html:root[data-theme="dark"] { --c-accent: ${siteConfig.accentColorDark}; }
+  @media (prefers-color-scheme: dark) {
+    html:root:not([data-theme="light"]) { --c-accent: ${siteConfig.accentColorDark}; }
+  }
+`;
 ---
 
 <html lang="en">
@@ -17,23 +28,138 @@ import "../styles/global.css";
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
     <meta name="description" content={siteConfig.description} />
+    <meta name="color-scheme" content="light dark" />
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap"
       rel="stylesheet"
     />
+
     <title>{siteConfig.name} - {siteConfig.title}</title>
+
+    <style is:global set:html={accentVars}></style>
+
+    <!-- Runs before first paint, so a returning dark-mode visitor never
+         sees a flash of the light theme, and reveal-animated content is
+         hidden before it can appear. Deliberately inline and blocking.
+
+         The watchdog is the safety net: if the deferred module that
+         drives the reveals never runs, the hidden state is lifted and
+         the page reads as ordinary static content. -->
+    <script is:inline>
+      (function () {
+        var root = document.documentElement;
+
+        try {
+          var stored = localStorage.getItem("theme");
+          if (stored === "dark" || stored === "light") {
+            root.dataset.theme = stored;
+          }
+        } catch (e) {
+          // No storage access — fall through to prefers-color-scheme.
+        }
+
+        root.classList.add("reveal-ready");
+        setTimeout(function () {
+          if (!window.__revealInit) root.classList.remove("reveal-ready");
+        }, 2500);
+      })();
+    </script>
   </head>
-  <body>
+
+  <body class="bg-canvas text-ink">
     <Header />
-    <section>
+    <ThemeToggle />
+
+    <main>
       <Hero />
       <About />
       <Projects />
       <Experience />
       <Education />
-    </section>
+    </main>
+
     <Footer />
+
+    <script>
+      // Tells the head-script watchdog the reveals are under control.
+      (window as unknown as { __revealInit?: boolean }).__revealInit = true;
+
+      const reduced = window.matchMedia(
+        "(prefers-reduced-motion: reduce)",
+      ).matches;
+
+      /* ── Scroll reveal ───────────────────────────────────────────
+         Each element fades up once when it enters the viewport.
+         Siblings stagger so a list of cards arrives in sequence
+         instead of all at once. Capped at 6 steps so long lists
+         don't leave the last card waiting. */
+      const revealables =
+        document.querySelectorAll<HTMLElement>("[data-reveal]");
+
+      if (reduced) {
+        revealables.forEach((el) => el.classList.add("is-visible"));
+      } else {
+        revealables.forEach((el) => {
+          const siblings = Array.from(el.parentElement?.children ?? []).filter(
+            (child) => child.hasAttribute("data-reveal"),
+          );
+          const index = siblings.indexOf(el);
+          if (index > 0) {
+            el.style.setProperty(
+              "--reveal-delay",
+              `${Math.min(index, 6) * 60}ms`,
+            );
+          }
+        });
+
+        const revealObserver = new IntersectionObserver(
+          (entries) => {
+            entries.forEach((entry) => {
+              if (!entry.isIntersecting) return;
+              entry.target.classList.add("is-visible");
+              revealObserver.unobserve(entry.target);
+            });
+          },
+          { rootMargin: "0px 0px -8% 0px", threshold: 0.05 },
+        );
+
+        revealables.forEach((el) => revealObserver.observe(el));
+      }
+
+      /* ── Scroll spy ──────────────────────────────────────────────
+         Highlights the nav link for whichever section owns the
+         upper band of the viewport. */
+      const navLinks =
+        document.querySelectorAll<HTMLAnchorElement>("[data-nav-link]");
+      const sections = Array.from(navLinks)
+        .map((link) => document.querySelector(link.hash))
+        .filter((el): el is Element => el !== null);
+
+      if (sections.length) {
+        const setActive = (id: string) => {
+          navLinks.forEach((link) => {
+            const active = link.hash === `#${id}`;
+            link.classList.toggle("nav-active", active);
+            if (active) link.setAttribute("aria-current", "true");
+            else link.removeAttribute("aria-current");
+          });
+        };
+
+        const spyObserver = new IntersectionObserver(
+          (entries) => {
+            const visible = entries
+              .filter((entry) => entry.isIntersecting)
+              .sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top);
+            if (visible[0]) setActive(visible[0].target.id);
+          },
+          { rootMargin: "-20% 0px -70% 0px" },
+        );
+
+        sections.forEach((section) => spyObserver.observe(section));
+      }
+    </script>
   </body>
 </html>

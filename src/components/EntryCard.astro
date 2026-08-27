@@ -1,0 +1,76 @@
+---
+// Experience and Education entries are the same card with different
+// field names, so the markup lives here once.
+interface Props {
+  heading: string;
+  subheading: string;
+  dateRange: string;
+  logo?: string;
+  items?: string[];
+  /** Draws the connector down to the next card. */
+  connect?: boolean;
+}
+
+const {
+  heading,
+  subheading,
+  dateRange,
+  logo,
+  items = [],
+  connect = false,
+} = Astro.props;
+---
+
+<div class="relative mb-10 last:mb-0" data-reveal>
+  {
+    connect && (
+      <div class="absolute bottom-0 left-1/2 h-10 w-px -translate-x-1/2 translate-y-full bg-line" />
+    )
+  }
+
+  <div
+    class="rounded-2xl border border-line bg-surface p-5 shadow-card transition-shadow duration-300 hover:shadow-lift sm:p-6"
+  >
+    <div
+      class="mb-4 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between"
+    >
+      <div class="flex flex-1 items-center gap-4">
+        {
+          logo && (
+            <img
+              src={logo}
+              alt=""
+              loading="lazy"
+              decoding="async"
+              class="h-10 w-10 shrink-0 rounded-full border border-line bg-surface object-cover sm:h-12 sm:w-12"
+            />
+          )
+        }
+        <div class="min-w-0">
+          <h3 class="text-lg font-semibold text-ink sm:text-xl">
+            {heading}
+          </h3>
+          <p class="text-base text-accent sm:text-lg">{subheading}</p>
+        </div>
+      </div>
+      <span class="shrink-0 text-xs text-muted tabular-nums sm:text-sm">
+        {dateRange}
+      </span>
+    </div>
+
+    {
+      items.length > 0 && (
+        <ul class="space-y-2">
+          {items.map((item) => (
+            <li class="flex items-start">
+              <span class="mt-2 mr-3 inline-block h-1.5 w-1.5 shrink-0 rounded-full bg-accent" />
+              <span class="text-sm leading-relaxed text-muted sm:text-base">
+                {item}
+              </span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </div>
+</div>

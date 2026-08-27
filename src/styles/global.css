@@ -1,5 +1,138 @@
 @import "tailwindcss";
 
+/* ─────────────────────────────────────────────────────────────
+   Palette tokens.
+
+   Every colour lives on :root as a --c-* variable. The dark
+   theme only redefines those variables, so components never
+   need to know which theme is active.
+
+   Three cascade layers, in order:
+     1. :root                    → light (the default)
+     2. prefers-color-scheme     → dark, unless explicitly light
+     3. [data-theme="dark"]      → dark, set by the toggle
+
+   --c-accent is not defined here; index.astro emits it from
+   siteConfig so the config stays the single source of truth.
+   ───────────────────────────────────────────────────────────── */
+
+:root {
+  --c-canvas: #fafaf9;
+  --c-surface: #ffffff;
+  --c-ink: #18181b;
+  --c-muted: #71717a;
+  --c-line: #e4e4e7;
+  --c-shadow: 0 0 0 1px rgb(0 0 0 / 0.02), 0 2px 8px -2px rgb(0 0 0 / 0.06);
+  --c-shadow-lift: 0 0 0 1px rgb(0 0 0 / 0.03), 0 12px 28px -8px rgb(0 0 0 / 0.12);
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --c-canvas: #0a0a0b;
+    --c-surface: #141417;
+    --c-ink: #ededf0;
+    --c-muted: #8a8a94;
+    --c-line: #26262b;
+    --c-shadow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 2px 8px -2px rgb(0 0 0 / 0.4);
+    --c-shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.07), 0 12px 28px -8px rgb(0 0 0 / 0.6);
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme="dark"] {
+  --c-canvas: #0a0a0b;
+  --c-surface: #141417;
+  --c-ink: #ededf0;
+  --c-muted: #8a8a94;
+  --c-line: #26262b;
+  --c-shadow: 0 0 0 1px rgb(255 255 255 / 0.04), 0 2px 8px -2px rgb(0 0 0 / 0.4);
+  --c-shadow-lift: 0 0 0 1px rgb(255 255 255 / 0.07), 0 12px 28px -8px rgb(0 0 0 / 0.6);
+  color-scheme: dark;
+}
+
+/* `inline` makes utilities emit var(--c-*) directly instead of
+   copying the value at build time — that indirection is what
+   lets the toggle re-theme the page at runtime. */
+@theme inline {
+  --color-canvas: var(--c-canvas);
+  --color-surface: var(--c-surface);
+  --color-ink: var(--c-ink);
+  --color-muted: var(--c-muted);
+  --color-line: var(--c-line);
+  --color-accent: var(--c-accent);
+
+  --shadow-card: var(--c-shadow);
+  --shadow-lift: var(--c-shadow-lift);
+
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  /* Clears the fixed header when jumping to an anchor. */
+  scroll-padding-top: 5rem;
+}
+
 body {
-  font-family: 'IBM Plex Mono', monospace;
+  font-family: "IBM Plex Mono", monospace;
+  background-color: var(--c-canvas);
+  color: var(--c-ink);
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background-color: var(--c-accent);
+  color: var(--c-canvas);
+}
+
+:focus-visible {
+  outline: 2px solid var(--c-accent);
+  outline-offset: 3px;
+}
+
+/* ─────────────────────────────────────────────────────────────
+   Scroll reveal.
+
+   The hidden state is gated behind .reveal-ready, which the
+   blocking head script adds before first paint and a watchdog
+   removes if the observer never initialises. Content is visible
+   by default, so a failed or blocked bundle degrades to a plain
+   readable page rather than an empty one.
+
+   --reveal-delay carries the per-sibling stagger.
+   ───────────────────────────────────────────────────────────── */
+
+.reveal-ready [data-reveal] {
+  opacity: 0;
+  transform: translateY(16px);
+  transition:
+    opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+}
+
+.reveal-ready [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-ready [data-reveal] {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }

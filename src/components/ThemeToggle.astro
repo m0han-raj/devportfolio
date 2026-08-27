@@ -1,0 +1,125 @@
+---
+// Fixed to the viewport rather than sitting inside <Header />, because
+// the header is hidden below md: — this keeps the toggle reachable on
+// mobile. The icons cross-fade; only one is ever non-transparent, and
+// which one is decided purely by CSS off the root data-theme attribute.
+---
+
+<button
+  id="theme-toggle"
+  type="button"
+  aria-label="Toggle dark mode"
+  aria-live="polite"
+  class="fixed top-4 right-4 z-[60] grid h-10 w-10 place-items-center rounded-full border border-line bg-surface/80 text-muted shadow-card backdrop-blur-md transition-colors duration-300 hover:text-accent"
+>
+  <svg
+    class="icon-sun h-5 w-5"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 12m-4 0a4 4 0 1 0 8 0a4 4 0 1 0 -8 0"></path>
+    <path
+      d="M3 12h1m8 -9v1m8 8h1m-9 8v1m-6.4 -15.4l.7 .7m12.1 -.7l-.7 .7m0 11.4l.7 .7m-12.1 -.7l-.7 .7"
+    ></path>
+  </svg>
+  <svg
+    class="icon-moon h-5 w-5"
+    xmlns="http://www.w3.org/2000/svg"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+    <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z"
+    ></path>
+  </svg>
+</button>
+
+<style>
+  #theme-toggle svg {
+    grid-area: 1 / 1;
+    transition:
+      opacity 0.25s ease,
+      transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  /* Light is showing → offer the moon. */
+  .icon-sun {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.6);
+  }
+  .icon-moon {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Dark is showing → offer the sun. */
+  :global(:root[data-theme="dark"]) .icon-sun {
+    opacity: 1;
+    transform: none;
+  }
+  :global(:root[data-theme="dark"]) .icon-moon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.6);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-theme="light"])) .icon-sun {
+      opacity: 1;
+      transform: none;
+    }
+    :global(:root:not([data-theme="light"])) .icon-moon {
+      opacity: 0;
+      transform: rotate(90deg) scale(0.6);
+    }
+  }
+</style>
+
+<script>
+  const root = document.documentElement;
+  const button = document.getElementById("theme-toggle");
+
+  // Resolves what the user is actually looking at, which is not the
+  // same as data-theme: with no explicit choice the system decides.
+  const current = () =>
+    root.dataset.theme ??
+    (window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light");
+
+  const apply = (theme: string) => {
+    root.dataset.theme = theme;
+    try {
+      localStorage.setItem("theme", theme);
+    } catch {
+      // Private browsing / blocked site data — the toggle still works
+      // for this page view, it just won't be remembered.
+    }
+  };
+
+  button?.addEventListener("click", () =>
+    apply(current() === "dark" ? "light" : "dark"),
+  );
+
+  // Follow the OS while the visitor has made no explicit choice.
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", () => {
+      let stored = null;
+      try {
+        stored = localStorage.getItem("theme");
+      } catch {}
+      if (!stored) delete root.dataset.theme;
+    });
+</script>
