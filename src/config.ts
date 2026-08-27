@@ -68,8 +68,7 @@ export const siteConfig = {
       name: "DINO ViT-Tiny",
       description:
         "A self-supervised Vision Transformer trained with student-teacher EMA distillation on 5,000 unlabelled STL-10 images. Multi-crop augmentation and a centering-and-sharpening loss prevent representation collapse without a single label, reaching 36.5% linear-probe accuracy against 10% chance.",
-      // TODO: paste the DINO repo URL.
-      link: "",
+      link: "https://github.com/m0han-raj/DINO",
       skills: ["PyTorch", "TorchVision", "CUDA"],
     },
     {
@@ -85,14 +84,6 @@ export const siteConfig = {
         "A Transformer built from scratch on 1.2M English-German sentence pairs, following \u201CAttention Is All You Need\u201D. Custom attention and positional encoding give 35% faster convergence, reaching 59% BLEU within three epochs at 22% lower memory use.",
       link: "https://github.com/m0han-raj/EN2DE-Transformer",
       skills: ["PyTorch", "Transformers"],
-    },
-    {
-      name: "GradCAM",
-      // TODO: paste the real description and repo URL.
-      description:
-        "Gradient-weighted class activation mapping for CNN explainability, producing saliency maps that show which regions drive a model's prediction.",
-      link: "",
-      skills: ["PyTorch", "OpenCV"],
     },
     {
       name: "MedivUe",
