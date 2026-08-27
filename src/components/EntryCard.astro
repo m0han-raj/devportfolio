@@ -36,13 +36,18 @@ const {
     >
       <div class="flex flex-1 items-center gap-4">
         {
+          /* A constant white plate, not bg-surface: logos arrive with
+             transparent backgrounds and dark ink, which would vanish
+             against the dark surface. object-contain with padding keeps
+             marks whose corners reach the edge from being clipped by
+             the circular crop. */
           logo && (
             <img
               src={logo}
               alt=""
               loading="lazy"
               decoding="async"
-              class="h-10 w-10 shrink-0 rounded-full border border-line bg-surface object-cover sm:h-12 sm:w-12"
+              class="h-10 w-10 shrink-0 rounded-full border border-line bg-white object-contain p-1.5 sm:h-12 sm:w-12"
             />
           )
         }

@@ -99,7 +99,7 @@ export const siteConfig = {
       company: "Hydris AI",
       title: "AI Intern",
       dateRange: "Mar 2026 - Present",
-      logo: "",
+      logo: "/logos/hydris-ai.png",
       bullets: [
         "Built retrieval-augmented generation pipelines that surface water quality data and compositional records from a centralised knowledge base, cutting manual record lookup time by ~40% and opening historical test data to natural-language queries",
         "Designed the retrieval and indexing layer for fast semantic lookups across structured and unstructured water-testing datasets, improving retrieval accuracy by ~25% for field and engineering teams",
@@ -121,7 +121,7 @@ export const siteConfig = {
       company: "Indian Institute of Technology (IIT) Patna",
       title: "Undergraduate Research Intern",
       dateRange: "May 2025 - Jul 2025",
-      logo: "https://upload.wikimedia.org/wikipedia/en/thumb/5/52/Indian_Institute_of_Technology%2C_Patna.svg/1200px-Indian_Institute_of_Technology%2C_Patna.svg.png",
+      logo: "/logos/iit-patna.png",
       bullets: [
         "Applied game-theoretic optimization techniques to improve photonic sensor performance, achieving a 12% increase in output efficiency and signal quality",
         "Designed and implemented neural network architectures for advanced signal processing, reducing classification error by 9% through custom layers and activation functions",
@@ -143,7 +143,7 @@ export const siteConfig = {
       degree: "Higher Secondary Education",
       dateRange: "2011 - 2023",
       logo: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpHy1VA-vsmgrvJc-oEAVZQtBaMp2BThghbJHaf53s7w&s",
-      achievements: ["Final Percentile : 84.7%"],
+      achievements: ["Final Percentile : 82%"],
     },
   ],
 };
