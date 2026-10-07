@@ -63,7 +63,7 @@ When modifying components:
 
 The `src/config.ts` exports a `siteConfig` object with these sections:
 - Basic info: name, title, description, accentColor, accentColorDark
-- Social links: email, linkedin, twitter, github (all optional)
+- Social links: email, linkedin, twitter, github, resume (all optional; icons live in `src/socials.ts`, shared by Hero and Footer)
 - aboutMe: string
 - skillGroups: array of {category, items[]}
 - projects: array of {name, description, link, skills} — an empty `link` renders the card without a click affordance

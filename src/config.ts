@@ -15,6 +15,8 @@ export const siteConfig = {
     linkedin: "https://www.linkedin.com/in/mohanraj328/",
     twitter: "https://x.com/MohanRaj413",
     github: "https://github.com/m0han-raj",
+    resume:
+      "https://drive.google.com/file/d/1OXdYdHzx6kWX7QoQo7-LsnFpItlXuZTf/view",
   },
   aboutMe:
     "A very keen AI Engineer with a Passion to solve questions that are yet to be solved",
