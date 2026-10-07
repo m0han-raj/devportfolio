@@ -1,3 +1,5 @@
+import portrait from "./assets/portrait.jpg";
+
 export const siteConfig = {
   name: "Mohan Raj",
   title: "an AI Engineer",
@@ -9,7 +11,8 @@ export const siteConfig = {
   accentColor: "#1e40af",
   accentColorDark: "#5b8cff",
 
-  avatar: "https://media.licdn.com/dms/image/v2/D5603AQFlHt7s6xysDw/profile-displayphoto-scale_400_400/B56Zs35Yg2IYAg-/0/1766169348679?e=1767830400&v=beta&t=GkAOWYKZ0qABYCM5P2eDEcEOmzWYhmJNrePFWlUWWOE",
+  // Hero portrait. Remove to fall back to a text-only hero.
+  avatar: portrait,
   social: {
     email: "mohan.work23@gmail.com",
     linkedin: "https://www.linkedin.com/in/mohanraj328/",
