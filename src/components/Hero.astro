@@ -44,20 +44,17 @@ import { socials } from "../socials";
     {
       siteConfig.avatar && (
         <figure
-          class="w-56 shrink-0 sm:w-72 md:order-last md:w-80 xl:w-[28rem]"
+          class="w-48 shrink-0 sm:w-60 md:order-last md:w-80 xl:w-96"
           data-reveal
         >
-          <!-- No frame: a radial mask feathers every edge into the
-               canvas, so the photo reads as part of the hero in
-               either theme. -->
           <Image
             src={siteConfig.avatar}
             alt={`Portrait of ${siteConfig.name}`}
-            widths={[320, 480, 720, 900]}
-            sizes="(min-width: 1280px) 448px, (min-width: 768px) 320px, (min-width: 640px) 288px, 224px"
+            widths={[240, 400, 640, 800]}
+            sizes="(min-width: 1280px) 384px, (min-width: 768px) 320px, (min-width: 640px) 240px, 192px"
             loading="eager"
             fetchpriority="high"
-            class="aspect-[4/5] w-full object-cover [mask-image:radial-gradient(ellipse_closest-side_at_50%_42%,black_35%,rgb(0_0_0/0.55)_65%,transparent)]"
+            class="aspect-[4/5] w-full rounded-2xl object-cover shadow-lift ring-1 ring-line"
           />
         </figure>
       )
